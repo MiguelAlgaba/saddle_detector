@@ -2845,7 +2845,9 @@ namespace cmp
   void FastFeatureDetector2::detectImpl( const Mat& image, vector<SadKeyPoint>& keypoints, const Mat& mask ) const
   {
     Mat grayImage = image;
-    if( image.type() != CV_8U ) cvtColor( image, grayImage, CV_BGR2GRAY );
+    // Note: Had to change to work with OpenCV4.x
+    // if( image.type() != CV_8U ) cvtColor( image, grayImage, CV_BGR2GRAY );
+    if( image.type() != CV_8U ) cvtColor( image, grayImage, COLOR_BGR2GRAY );
     cmp::FASTX( grayImage, keypoints, threshold, nonmaxSuppression, type );
     // KeyPointsFilter::runByPixelsMask( keypoints, mask );
   }
@@ -2855,7 +2857,9 @@ namespace cmp
   {
     Mat grayImage = image;
     // The image is already in gray scale from SORB functions
-    if( image.type() != CV_8U ) cvtColor( image, grayImage, CV_BGR2GRAY );
+    // Note: Had to change to work with OpenCV4.x
+    // if( image.type() != CV_8U ) cvtColor( image, grayImage, COLOR_BGR2GRAY );
+    if( image.type() != CV_8U ) cvtColor( image, grayImage, COLOR_BGR2GRAY );
     cmp::FASTX2( grayImage, keypoints, resp, threshold, nonmaxSuppression, type, scale, responsethr, deltaThr, scoreType,
     			 allC1feats, strictMaximum, subPixPrecision, gravityCenter, innerTstType, minArcLength, maxArcLength, blobThr );
   }

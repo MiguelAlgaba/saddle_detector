@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include <fstream>
 #include <iostream>
-#include <opencv/cv.h>
+//#include <opencv/cv.h>
 #include <opencv2/highgui/highgui.hpp>
 #include <opencv2/highgui/highgui_c.h>
 #include <opencv2/features2d/features2d.hpp>
@@ -205,7 +205,7 @@ int main( int argc, char** argv )
 	deltas_to_histogram(kpts);
 
 	// ------------------------- Test with pyramids ----------------------------- //
-#if false
+#if true
 	vector<Mat> pyrAdjacent(nlevels), pyrOrigin(nlevels);
 	image_pyramid_building(img, pyrAdjacent, pyrOrigin, nlevels, 0, scaleFactor, edgeThreshold, 31 );
 
@@ -239,7 +239,7 @@ int main( int argc, char** argv )
 				n++;
 			}
 		drawKeypoints(img, kptsShow, img_feats, Scalar::all(-1), DrawMatchesFlags::DRAW_RICH_KEYPOINTS);
-		imwrite( "../outcomes/output_features.jpg", img_feats );
+		imwrite( "output_features.png", img_feats );
 		namedWindow("Saddle features", cv::WINDOW_NORMAL);
 		imshow( "Saddle features", img_feats );
 
@@ -461,4 +461,6 @@ void deltas_to_histogram(vector<cmp::SadKeyPoint> kpts)
 						 Point( bin_w*(i), hist_h - cvRound(delta_hist.at<float>(i)) ),
 						 Scalar( 255, 0, 0), 2, 8, 0  );
 	}
+    
+	imshow( "Keypoints histogram", histImage );
 }
