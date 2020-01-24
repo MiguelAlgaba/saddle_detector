@@ -13,32 +13,32 @@
 
 using namespace cv;
 
+namespace cmp
+{
 
-namespace cmp{
+    class SadKeyPoint;
+    
+    void computeKeyPoints(const std::vector<Mat>& imagePyramid,
+                          const std::vector<Mat>& maskPyramid,
+                          std::vector<Mat>& respPyramid,
+                          std::vector<std::vector<SadKeyPoint> >& allKeypoints,
+                          double responseThr, int epsilon, float scaleFactor,
+                          int edgeThreshold, int patchSize, int scoreType, int doNMS, uchar deltaThr, int nfeatures,
+                          bool allC1feats, bool strictMaximum, int subPixPrecision, bool gravityCenter, int innerTstType,
+                          int minArcLength, int maxArcLength, short ringsType, float alpha );
 
-class SadKeyPoint;
-
-void computeKeyPoints(const vector<Mat>& imagePyramid,
-                             const vector<Mat>& maskPyramid,
-                             vector<Mat>& respPyramid,
-                             vector<vector<SadKeyPoint> >& allKeypoints,
-                             double responseThr, int epsilon, float scaleFactor,
-                             int edgeThreshold, int patchSize, int scoreType, int doNMS, uchar deltaThr, int nfeatures,
-                             bool allC1feats, bool strictMaximum, int subPixPrecision, bool gravityCenter, int innerTstType,
-                             int minArcLength, int maxArcLength, short ringsType, float alpha );
-
-class CV_EXPORTS_W FeatureDetector{
-public:
-
-	FeatureDetector(){
-
-	}
-
-	virtual ~FeatureDetector(){};
-
-	virtual void detectKeypoints(const Mat& image, vector<SadKeyPoint>& keypoints, cv::Mat mask = cv::Mat()) const = 0;
-
-};
+    class CV_EXPORTS_W FeatureDetector{
+    public:
+        
+        FeatureDetector(){
+            
+        }
+        
+        virtual ~FeatureDetector(){};
+        
+        virtual void detectKeypoints(const Mat& image, std::vector<SadKeyPoint>& keypoints, cv::Mat mask = cv::Mat()) const = 0;
+        
+    };
 
 class CV_EXPORTS_W SORB : public cmp::FeatureDetector
 {
@@ -70,25 +70,22 @@ public:
     int descriptorType() const;
 
     // Compute the ORB features and descriptors on an image
-    void operator()(InputArray image, InputArray mask, vector<SadKeyPoint>& keypoints) const;
+    void operator()(InputArray image, InputArray mask, std::vector<SadKeyPoint>& keypoints) const;
 
     // Compute the ORB features and descriptors on an image
-    void operator()( InputArray image, InputArray mask, vector<SadKeyPoint>& keypoints,
+    void operator()( InputArray image, InputArray mask, std::vector<SadKeyPoint>& keypoints,
                      OutputArray descriptors, bool useProvidedKeypoints=false ) const;
 
-    virtual void detectKeypoints(const Mat& image, vector<SadKeyPoint>& keypoints, cv::Mat mask = cv::Mat()) const
+    virtual void detectKeypoints(const Mat& image, std::vector<SadKeyPoint>& keypoints, cv::Mat mask = cv::Mat()) const
     {
     	cv::Mat descriptors;
     	(*this)(image, mask, keypoints, descriptors);
     };
 
-
-
-
 protected:
 
-    void computeImpl( const Mat& image, vector<SadKeyPoint>& keypoints, Mat& descriptors ) const;
-    void detectImpl( const Mat& image, vector<SadKeyPoint>& keypoints, const Mat& mask=Mat() ) const;
+    void computeImpl( const Mat& image, std::vector<SadKeyPoint>& keypoints, Mat& descriptors ) const;
+    void detectImpl( const Mat& image, std::vector<SadKeyPoint>& keypoints, const Mat& mask=Mat() ) const;
 
     CV_PROP_RW int nfeatures;
     CV_PROP_RW double responseThr;
@@ -184,7 +181,7 @@ public:
                                         int maxTotalKeypoints=1000,
                                         int gridRows=4, int gridCols=4 );
 
-    virtual void detectKeypoints(const Mat& image, vector<SadKeyPoint>& keypoints, cv::Mat mask = cv::Mat()) const;
+    virtual void detectKeypoints(const Mat& image, std::vector<SadKeyPoint>& keypoints, cv::Mat mask = cv::Mat()) const;
 
     Ptr<cmp::FeatureDetector> detector;
     int maxTotalKeypoints;

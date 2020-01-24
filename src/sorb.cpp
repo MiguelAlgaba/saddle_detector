@@ -39,9 +39,10 @@
 #include "fast.hpp"
 #include <stdio.h>
 #include <iostream>
-#include <opencv2/highgui/highgui.hpp>
+//#include <opencv2/highgui/highgui.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
-#include <opencv2/highgui/highgui_c.h>
+#include <opencv2/core/types_c.h>
+//#include <opencv2/highgui/highgui_c.h>
 #include "sorb.h"
 #include "lbq.h"
 
@@ -215,6 +216,8 @@ static void computeOrbDescriptor(const SadKeyPoint& kpt,
     }
     else if( WTA_K == 4 )
     {
+        assert(false);
+        #if 0
         for (int i = 0; i < dsize; ++i, pattern += 16)
         {
             int t0, t1, t2, t3, u, v, k, val;
@@ -252,6 +255,7 @@ static void computeOrbDescriptor(const SadKeyPoint& kpt,
 
             desc[i] = (uchar)val;
         }
+        #endif
     }
     else
         CV_Error( CV_StsBadSize, "Wrong WTA_K. It can be only 2, 3 or 4." );
@@ -799,7 +803,7 @@ static void computeDescriptors(const Mat& image, vector<SadKeyPoint>& keypoints,
  * and it is fixed inside this function
  */
 
-
+#if 0
 void substract_images( Mat iMatlab )
 {
 
@@ -820,7 +824,7 @@ void substract_images( Mat iMatlab )
 		std::cout << "Dimension mismatch between images" << std::endl;
 
 }
-
+#endif
 
 void SORB::operator()( InputArray _image, InputArray _mask, vector<SadKeyPoint>& _keypoints,
                       OutputArray _descriptors, bool useProvidedKeypoints) const
@@ -843,7 +847,7 @@ void SORB::operator()( InputArray _image, InputArray _mask, vector<SadKeyPoint>&
     Mat image = _image.getMat(), mask = _mask.getMat();
 
     if( image.type() != CV_8UC1 )
-        cvtColor(_image, image, CV_BGR2GRAY);
+        cvtColor(_image, image, COLOR_BGR2GRAY);
 
     int levelsNum = this->nlevels;
 

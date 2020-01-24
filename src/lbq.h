@@ -28,5 +28,4 @@ private:
 };
 } //End namespace Binpat
 
-
 #endif // LBQ_H

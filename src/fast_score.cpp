@@ -491,19 +491,19 @@ double cmpFeatureScore(const uchar* ptr, const int pixel[], const int* labels, d
 		}
 		case SORB::GM_DELTA_SCORE:
 		{
-			int lengths[] = {0,0,0,0,0}, *ptr;
-			ptr = lengths;
+			int lengths[] = {0,0,0,0,0}, *ptr2;
+			ptr2 = lengths;
 
 			for (int iElem=0; iElem<15; iElem++)
 			{
 				if (labels[iElem] != 0)
-					(*ptr)++;
-				if ((labels[iElem]!=labels[iElem+1]) && (labels[iElem+1]!=0) && (*ptr>0))
-					ptr++;
+					(*ptr2)++;
+				if ((labels[iElem]!=labels[iElem+1]) && (labels[iElem+1]!=0) && (*ptr2>0))
+					ptr2++;
 			}
 
 			if (labels[15] != 0)
-				(*ptr)++;
+				(*ptr2)++;
 
 			lengths[0] += lengths[4];
 

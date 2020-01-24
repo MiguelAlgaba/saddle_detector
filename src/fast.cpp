@@ -350,7 +350,11 @@ namespace cmp
                   continue;
 
                 uchar n_label[] = {0,0,0};
-                p_label=0, p_begin=0, p_len=0, n_arcs = 0, count_elem = 1;
+                p_label=0;
+                p_begin=0;
+                p_len=0;
+                n_arcs = 0;
+                count_elem = 1;
 
                 labels[0] = tab[ptr[pixel[k]]];
                 n_label[labels[0]]++;
@@ -1164,7 +1168,7 @@ namespace cmp
     double st;
     const Mat img = _img.getMat();
 
-#if true
+#if 0
     ostringstream ss;
     ss << scale;
     String imgpath = (("./imscale_" + ss.str() ) + ".ppm");
@@ -1226,7 +1230,7 @@ namespace cmp
     int idx;
     uchar p_regs, count_elem;
     uchar *labels, *begins, *lengths;
-    int* lbl;
+    //int* lbl;
 
     labels  = new uchar[9];
     begins  = new uchar[9];
@@ -1662,8 +1666,8 @@ namespace cmp
           currDl[j] = delta;
 
           // Compute the feature response
-          int* lbl = templateLarge;
-          curr[j] = cmpFeatureScore(ptr, pixel, lbl, v, delta, scoreType);
+          int* lbl2 = templateLarge;
+          curr[j] = cmpFeatureScore(ptr, pixel, lbl2, v, delta, scoreType);
 
           // Save the point in the binary image
           uchar* ptrBinary = binImg.ptr<uchar>(i);
@@ -1984,8 +1988,8 @@ namespace cmp
           currDl[j] = delta;
 
           // Compute the feature response
-          int* lbl = templateLarge;
-          curr[j] = cmpFeatureScore(ptr, pixel, lbl, v, delta, scoreType);
+          int* lbl2 = templateLarge;
+          curr[j] = cmpFeatureScore(ptr, pixel, lbl2, v, delta, scoreType);
 
           // Save the point in the binary image
           uchar* ptrBinary = binImg.ptr<uchar>(i);
@@ -2306,8 +2310,8 @@ namespace cmp
           currDl[j] = delta;
 
           // Compute the feature response
-          int* lbl = templateLarge;
-          curr[j] = cmpFeatureScore(ptr, pixel, lbl, v, delta, scoreType);
+          int* lbl2 = templateLarge;
+          curr[j] = cmpFeatureScore(ptr, pixel, lbl2, v, delta, scoreType);
 
           // Save the point in the binary image
           uchar* ptrBinary = binImg.ptr<uchar>(i);
@@ -2409,7 +2413,7 @@ namespace cmp
     double st;
     const Mat img = _img.getMat();
 
-#if true
+#if 0
     ostringstream ss;
     ss << scale;
     String imgpath = (("./imscale_" + ss.str() ) + ".ppm");
@@ -2635,8 +2639,8 @@ namespace cmp
           currDl[j] = delta;
 
           // Compute the feature response
-          int* lbl = templateLarge;
-          curr[j] = cmpFeatureScore(ptr, pixel, lbl, v, delta, scoreType);
+          int* lbl2 = templateLarge;
+          curr[j] = cmpFeatureScore(ptr, pixel, lbl2, v, delta, scoreType);
 
           // Save the point in the binary image
           uchar* ptrBinary = binImg.ptr<uchar>(i);
