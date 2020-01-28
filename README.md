@@ -11,3 +11,15 @@ spread and appearing in high density in a range of images.
 The Saddle detector is among the fastest proposed. In comparison with detector
 with similar speed, the Saddle features show superior matching performance on
 number of challenging datasets.
+
+# Create Xcode project
+
+```
+ccmake ../saddle_detector/src/ -G Xcode
+```
+
+# Run example
+
+```
+./Debug/saddlepts --feats 1000 --visu --image ../saddle_detector/img1.ppm --output ./outputFeatures.txt
+```
