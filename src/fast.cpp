@@ -1311,8 +1311,8 @@ namespace cmp
               templateLarge[k] = 1;
 
             // FIRST brighter or darker
-            if (((templateLarge[k]==1) && (templateLarge[k-1]==2) && (ptr[pixel[k]] > lowerThr2)) ||
-                ((templateLarge[k]==2) && (templateLarge[k-1]==1) && (ptr[pixel[k]] < upperThr2)))
+            if ((k>0 && (templateLarge[k]==1) && (templateLarge[k-1]==2) && (ptr[pixel[k]] > lowerThr2)) ||
+                (k>0 && (templateLarge[k]==2) && (templateLarge[k-1]==1) && (ptr[pixel[k]] < upperThr2)))
               templateLarge[k] = 0;
           }
 
